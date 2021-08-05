@@ -60,7 +60,7 @@ export default defineComponent({
     flex-direction: column;
     width: ~"calc(100% / 7)";
     height: ~"calc(100% / 6)";
-    min-width: @sc-cell-min-width;
+    // min-width: @sc-cell-min-width;
     min-height: @sc-cell-min-height;
     padding: 4px;
     // border-top: 1px solid @sc-border-color;

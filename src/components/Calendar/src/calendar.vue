@@ -13,6 +13,7 @@
         :startWeek="startWeek"
         :data="events"
       ></month>
+      <eventList :events="events"/>
     </div>
   </div>
 </template>
@@ -21,13 +22,14 @@ import { defineComponent, reactive, toRefs } from "vue";
 import headerBar from "./header.vue";
 import week from "./week.vue";
 import month from "./month.vue";
-
+import eventList from './eventList.vue'
 export default defineComponent({
   name: "schedule-calendar",
   components: {
     headerBar,
     week,
     month,
+    eventList
   },
   props: {
     startMonth: String,

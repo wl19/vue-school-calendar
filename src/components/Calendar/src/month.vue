@@ -91,7 +91,7 @@ export default defineComponent({
     top: @sc-week-height;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 40px;
     display: flex;
     flex-wrap: wrap; // transition: transform .3s ease-in-out;
   }

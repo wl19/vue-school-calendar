@@ -1,7 +1,7 @@
 <template>
-  <div class="schedule-calendar-date" :class="[type, { today: isToday }]">
+  <div class="schedule-calendar-date">
     <div class="schedule-calendar-date-hd">
-      <div class="schedule-calendar-date-label">{{ date.getDate() }}</div>
+      <div class="schedule-calendar-date-label" :style="eventStyle" :class="[type,{ today: isToday }]">{{ date.getDate() }}</div>
     </div>
   </div>
 </template>
@@ -19,8 +19,29 @@ export default defineComponent({
     const isToday = computed(() => {
       return isSameDay(new Date(), props.date);
     });
+    // console.log(props.data);
+    const eventStyle = computed(()=>{
+      const style = {
+        background: '#fff',
+        color: props.type == 'current' ? '#444' : '#ccc'
+      }
+      if(props.data && props.data.length){
+        for (const item of props.data) {
+          if(isSameDay(new Date(item.date),props.date)){
+            return {
+              background: item.background,
+              color: item.color?item.color:'#fff'
+            }
+          }
+        }
+        return style
+      }else{
+        return style
+      }
+    })
     return {
       isToday,
+      eventStyle
     };
   },
 });
@@ -46,11 +67,7 @@ export default defineComponent({
       border-left: none;
     }
 
-    &.prev,
-    &.next {
-      color: @sc-gray-light-color;
-      // background: @sc-gray-background;
-    }
+    
 
     &-label {
       width: @sc-data-label-size;
@@ -58,19 +75,27 @@ export default defineComponent({
       line-height: @sc-data-label-size;
       text-align: center;
       border-radius: 50%;
-    }
 
-    &.today {
-      .schedule-calendar-date-label {
-        color: @sc-body-color;
-        background: @sc-primary-color;
+      &.prev,
+      &.next {
+        // color: @sc-gray-light-color !important;
+        // background: @sc-gray-background;
+      }
+
+      &.today {
+        color: @sc-body-color !important;
+        background: @sc-primary-color !important;
       }
     }
+    
   }
   &date-hd {
     display: flex;
     justify-content: center;
     align-content: center;
+    height: 100%;
+    align-items: center;
   }
+  
 }
 </style>

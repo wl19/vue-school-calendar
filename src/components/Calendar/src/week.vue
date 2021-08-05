@@ -13,7 +13,7 @@ export default defineComponent({
   },
   setup(props) {
     const state = reactive({
-      cn: ["日", "一", "二", "三", "四", "五", "六"],
+      cn: ["日","周次", "一", "二", "三", "四", "五", "六"],
       en: [
         "Sunday",
         "Monday",

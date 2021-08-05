@@ -1,7 +1,7 @@
 <template>
   <div class="schedule-calendar-date">
     <div class="schedule-calendar-date-hd">
-      <div class="schedule-calendar-date-label" :style="eventStyle" :class="[type,{ today: isToday }]">{{ date.getDate() }}</div>
+      <div class="schedule-calendar-date-label" :style="eventStyle" :class="[type]">{{ date.getDate() }}</div>
     </div>
   </div>
 </template>
@@ -14,22 +14,26 @@ export default defineComponent({
     date: Date,
     type: String,
     data: Array,
+    colorList: {
+      type: Array,
+      default: [],
+    },
   },
   setup(props) {
     const isToday = computed(() => {
       return isSameDay(new Date(), props.date);
     });
-    // console.log(props.data);
     const eventStyle = computed(()=>{
       const style = {
         background: '#fff',
         color: props.type == 'current' ? '#444' : '#ccc'
       }
       if(props.data && props.data.length){
-        for (const item of props.data) {
-          if(isSameDay(new Date(item.date),props.date)){
+        for (let i = 0; i < props.data.length; i++) {
+          let item = props.data[i]
+          if(isSameDay(new Date(item.start),props.date)){
             return {
-              background: item.background,
+              background: item.background?item.background:props.colorList[i],
               color: item.color?item.color:'#fff'
             }
           }

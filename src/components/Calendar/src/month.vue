@@ -10,6 +10,7 @@
       :type="item.type"
       :data="data"
       :key="index"
+      :colorList="colorList"
     ></date-cell>
   </div>
 </template>
@@ -27,6 +28,10 @@ export default defineComponent({
     month: Number,
     startWeek: Number,
     data: Array,
+    colorList: {
+      type: Array,
+      default: [],
+    },
   },
   setup(props) {
     const state = reactive({
@@ -89,7 +94,7 @@ export default defineComponent({
   &month {
     position: absolute;
     top: @sc-week-height;
-    left: 0;
+    left: ~"calc(100% / 8)";
     right: 0;
     bottom: 40px;
     display: flex;

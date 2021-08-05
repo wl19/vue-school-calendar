@@ -1,29 +1,34 @@
 <template>
-<div class="warp">
-  <div class="list">
-    <div class="dot" :style="{background: '#1976d2'}"></div>
-    <div class="text">今天</div>
+  <div class="warp">
+    <div v-for="(item, index) in events" :key="item.start" class="list">
+      <div
+        class="dot"
+        :style="{
+          background: item.background ? item.background : colorList[index],
+        }"
+      ></div>
+      <div class="text">{{ item.title }}</div>
+    </div>
   </div>
-  <div v-for="item in events" :key="item.id"  class="list">
-    <div class="dot" :style="{background: item.background}"></div>
-    <div class="text">{{item.text}}</div>
-  </div>
-</div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 export default defineComponent({
   props: {
     events: {
       type: Array,
       default: [],
-    }
-  }
-})
+    },
+    colorList: {
+      type: Array,
+      default: [],
+    },
+  },
+});
 </script>
 <style lang="less" scoped>
-.warp{
+.warp {
   display: flex;
   justify-content: center;
   position: absolute;
@@ -33,17 +38,16 @@ export default defineComponent({
   .list {
     display: flex;
     margin: 20px;
-    .dot{
+    .dot {
       width: 20px;
       height: 20px;
       display: inline-block;
       border-radius: 5px;
       margin-right: 5px;
     }
-    .text{
+    .text {
       line-height: 20px;
     }
   }
 }
-
 </style>

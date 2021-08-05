@@ -4,16 +4,19 @@
       :year="year"
       :month="month"
       @updateValue="updateView"
+      :title="title"
     ></header-bar>
     <div class="vue-schedule-calendar-body">
       <week :startWeek="startWeek"></week>
+      <weekNum :year="year" :month="month" :startWeek="startWeek" :terms="terms" />
       <month
         :year="year"
         :month="month"
         :startWeek="startWeek"
         :data="events"
+        :colorList="colorList"
       ></month>
-      <eventList :events="events"/>
+      <eventList :events="events" :colorList="colorList" />
     </div>
   </div>
 </template>
@@ -23,13 +26,15 @@ import headerBar from "./header.vue";
 import week from "./week.vue";
 import month from "./month.vue";
 import eventList from './eventList.vue'
+import weekNum from './weekNum.vue'
 export default defineComponent({
   name: "schedule-calendar",
   components: {
     headerBar,
     week,
     month,
-    eventList
+    eventList,
+    weekNum
   },
   props: {
     startMonth: String,
@@ -41,6 +46,15 @@ export default defineComponent({
       type: Array,
       default: [],
     },
+    colorList: {
+      type: Array,
+      default: ["#45b97c","#ef4136","#2196f3"],
+    },
+    terms: {
+      type: Array,
+      default: [],
+    },
+    title: String
   },
   setup() {
     const state = reactive({

@@ -1,5 +1,7 @@
 <template>
-  <header class="schedule-calendar-hd">
+  <div class="warp">
+    <div class="title">{{title}}</div>
+    <header class="schedule-calendar-hd">
     <button
       type="button"
       class="schedule-calendar-arrow double-arrow"
@@ -37,6 +39,8 @@
       &gt;&gt;
     </button>
   </header>
+  </div>
+  
 </template>
 <script>
 import {
@@ -57,6 +61,7 @@ export default defineComponent({
   props: {
     year: Number,
     month: Number,
+    title: String
   },
   emits: ["updateValue"],
   setup(props, { emit }) {
@@ -124,6 +129,18 @@ export default defineComponent({
 <style lang="less" scoped>
 @import "./variables.less";
 
+.warp{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background: @sc-primary-color;
+
+  .title{
+    color: #fff;
+  }
+}
+
 .schedule-calendar- {
   &hd {
     display: flex;
@@ -134,7 +151,7 @@ export default defineComponent({
     padding: @sc-header-padding 0;
     font-size: @sc-header-fs;
     line-height: @sc-header-height - @sc-header-padding * 2;
-    background: @sc-primary-color;
+    
     color: @sc-body-color;
     user-select: none;
   }

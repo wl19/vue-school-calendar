@@ -119,6 +119,12 @@ const tryParse = (obj) => (typeof obj === "string" ? new Date(obj) : obj);
 export const isSameDay = (one, two) => {
   const oneDate = tryParse(one);
   const twoDate = tryParse(two);
+  // console.log(oneDate.getDate());
+  // console.log(twoDate.getDate());
+  // console.log(oneDate.getMonth());
+  // console.log(twoDate.getMonth());
+  // console.log(oneDate.getFullYear());
+  // console.log(twoDate.getFullYear());
   return (
     oneDate.getDate() === twoDate.getDate() &&
     oneDate.getMonth() === twoDate.getMonth() &&
@@ -143,4 +149,29 @@ export const format = (date, exp = "yyyy年MM月dd日") => {
     .replace("yyyy", y)
     .replace("MM", fillZero(m))
     .replace("dd", fillZero(d));
+};
+
+/**
+ * 在对应时间范围 获取周数
+ * @example getWeekNumByDateRange(new Date("2021-08-2 00:00:00"),"2021-07-26","2021-08-29")
+ */
+export const getWeekNumByDateRange = (cur, start, end) => {
+  // 一天的毫秒数
+  const ONE_DAY_TIME = 60*60*24*1000;
+  // 七天的毫秒数
+  const SEVEN_DAY_TIME = ONE_DAY_TIME * 7
+  // 日期
+  const curDate = tryParse(cur);
+  const startDate = new Date(`${start} 00:00:00`);
+  const endDate = new Date(`${end} 00:00:00`);
+
+  // 总周数
+  const totalWeek = ((endDate.getTime()+ONE_DAY_TIME) - startDate.getTime())/SEVEN_DAY_TIME
+  console.log(curDate.getTime());
+  for (let i = 0; i < totalWeek; i++) {
+    if(curDate.getTime() == startDate.getTime() + (i * SEVEN_DAY_TIME)){
+      return `第${i+1}周`
+    }
+  }
+  return '假期'
 };

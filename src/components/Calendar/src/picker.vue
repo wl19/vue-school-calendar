@@ -52,8 +52,10 @@ export default defineComponent({
       (val) => {
         if (!val) return;
         nextTick(() => {
-          yearList.value.querySelector("li.active").scrollIntoView();
-          monthList.value.querySelector("li.active").scrollIntoView();
+          const yearDom = yearList.value
+          yearDom.parentNode.scrollTop = yearList.value.querySelector("li.active").offsetTop;
+          const monthDom = monthList.value
+          monthDom.parentNode.scrollTop = monthList.value.querySelector("li.active").offsetTop;
         });
       }
     );
